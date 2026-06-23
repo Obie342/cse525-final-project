@@ -155,4 +155,4 @@ This project began as a CSE 525 final project exploring real-time audio processi
 
 ## License
 
-No license has been selected yet. Add the license that matches how you want others to use the project.
+No license.
