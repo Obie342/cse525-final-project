@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Settings{% endblock %}
+{% block content %}
+<h1>Visualization settings</h1>
+<form method="post" class="settings-form">
+  <label for="brightness">Brightness: <output id="brightness-value">{{ settings.brightness }}</output></label>
+  <input type="range" id="brightness" name="brightness" min="0" max="255" value="{{ settings.brightness }}" oninput="document.getElementById('brightness-value').value=this.value">
+  <label for="pattern">Pattern</label>
+  <select id="pattern" name="pattern">
+    <option value="rainbow" {% if settings.pattern == 'rainbow' %}selected{% endif %}>Rainbow</option>
+    <option value="single_color" {% if settings.pattern == 'single_color' %}selected{% endif %}>Single color</option>
+  </select>
+  <div class="color-grid">
+    {% for name, key in [('Red','r'), ('Green','g'), ('Blue','b')] %}
+      <label>{{ name }}<input type="number" name="{{ name|lower }}" min="0" max="255" value="{{ settings.color[key] }}"></label>
+    {% endfor %}
+  </div>
+  <button type="submit">Save settings</button>
+</form>
+<a class="button secondary" href="{{ url_for('web.index') }}">Back to dashboard</a>
+{% endblock %}

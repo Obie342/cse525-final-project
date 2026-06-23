@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Audio LED Visualizer</h1>
+<p class="lead">Drive a WS2812B LED strip from a Raspberry Pi using live microphone input or a WAV file.</p>
+<div class="status {{ 'active' if controller.running else '' }}">
+  Status: {{ 'visualizing' if controller.running else 'idle' }}
+  {% if controller.last_error %}<span class="error-text">{{ controller.last_error }}</span>{% endif %}
+</div>
+<section>
+  <h2>Live audio</h2>
+  <form action="{{ url_for('web.live') }}" method="post">
+    <button type="submit">Start microphone visualization</button>
+  </form>
+</section>
+<section>
+  <h2>WAV file</h2>
+  <form action="{{ url_for('web.file_audio') }}" method="post" enctype="multipart/form-data">
+    <label for="file">Choose a 16-bit PCM WAV file</label>
+    <input type="file" id="file" name="file" accept="audio/wav,.wav" required>
+    <button type="submit">Visualize WAV file</button>
+  </form>
+</section>
+<div class="actions">
+  <form action="{{ url_for('web.stop') }}" method="post"><button class="secondary" type="submit">Stop and clear LEDs</button></form>
+  <a class="button secondary" href="{{ url_for('web.settings') }}">Settings</a>
+</div>
+{% endblock %}

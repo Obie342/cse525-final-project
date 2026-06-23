@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Live Visualization{% endblock %}
+{% block content %}
+<h1>Live visualization started</h1>
+<p>The USB microphone is being sampled and mapped to the LED strip.</p>
+<form action="{{ url_for('web.stop') }}" method="post"><button type="submit">Stop visualization</button></form>
+<a class="button secondary" href="{{ url_for('web.index') }}">Back to dashboard</a>
+{% endblock %}
