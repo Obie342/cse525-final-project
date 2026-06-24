@@ -2,6 +2,12 @@
 
 A Flask web application that turns a **WS2812B addressable LED strip** into an audio-reactive volume meter. Run it on a Raspberry Pi, open the dashboard from another device on the local network, and visualize either live USB microphone input or an uploaded WAV file.
 
+<video src="media/first-35-seconds-demo.mp4" controls width="720">
+  <a href="media/first-35-seconds-demo.mp4">Download overview demo</a>
+</video>
+
+![Web dashboard in portrait orientation](images/gui-example-portrait-orientation.jpg)
+
 ## Features
 
 - Live visualization from a USB microphone
@@ -12,6 +18,12 @@ A Flask web application that turns a **WS2812B addressable LED strip** into an a
 - Safe start/stop handling with automatic LED cleanup
 - Mock LED mode when developed on a non-Raspberry Pi computer
 - Responsive Flask dashboard
+
+Live microphone visualization on the LED strip:
+
+<video src="media/audio-visualizer-microphone-demo.mp4" controls width="720">
+  <a href="media/audio-visualizer-microphone-demo.mp4">Download microphone demo</a>
+</video>
 
 ## Hardware
 
@@ -33,6 +45,20 @@ Default signal wiring:
 | Raspberry Pi logic | 3.3 V through level shifter |
 | Grounds | All connected together |
 
+### Wiring reference
+
+Hand-drawn schematic from early bring-up (Raspberry Pi 3B+, level shifter, 144-LED strip, star ground). The sketch routes strip power from the Pi 5 V pin for clarity; **use an external 5 V supply for the strip in practice** (see power warning above).
+
+![Hand-drawn wiring schematic](images/handwritten-schematics.jpg)
+
+Level shifter and star-ground wiring on the breadboard:
+
+![Level shifter and star-ground topology](images/level-shifter-and-star-ground-topology.jpg)
+
+GPIO header connections on the Raspberry Pi:
+
+![GPIO wiring on Raspberry Pi](images/gpio-available-on-pi.jpg)
+
 ## Project structure
 
 ```text
@@ -52,6 +78,9 @@ cse525-final-project/
 │   ├── file.html
 │   ├── settings.html
 │   └── 404.html
+├── images/                        # Hardware photos, schematics, and UI screenshots
+├── media/                         # Demo clips (overview + live microphone)
+├── archive/                       # Superseded prototypes (see archive/README.md)
 ├── tests/test_app.py
 ├── uploads/.gitkeep
 ├── requirements.txt
@@ -151,7 +180,11 @@ python app.py
 
 ## Background
 
-This project began as a CSE 525 final project exploring real-time audio processing, Flask, Raspberry Pi GPIO/PWM, and individually addressable LEDs. The refreshed layout separates the web layer, audio processing, hardware access, and thread management so the project is easier to understand and extend.
+This project began as a CSE 525 final project exploring real-time audio processing, Flask, Raspberry Pi GPIO/PWM, and individually addressable LEDs. The refreshed layout separates the web layer, audio processing, hardware access, and thread management so the project is easier to understand and extend. The shipped visualizer maps audio **RMS level** to a bar-style meter; an earlier **FFT-based** monolith is preserved in [`archive/main_test3_fft_monolith.py`](archive/main_test3_fft_monolith.py).
+
+Oscilloscope capture from early hardware bring-up (~60 Hz test signal), before the RMS bar algorithm was finalized:
+
+![Oscilloscope signal during hardware bring-up](images/scope-signal-bring-up.jpg)
 
 ## License
 

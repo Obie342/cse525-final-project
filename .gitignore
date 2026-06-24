@@ -6,4 +6,5 @@ venv/
 .env
 uploads/*
 !uploads/.gitkeep
+media/demo.mov
 .DS_Store
