@@ -188,4 +188,4 @@ Oscilloscope capture from early hardware bring-up (~60 Hz test signal), before t
 
 ## License
 
-No license.
+MIT — see [LICENSE](LICENSE).
