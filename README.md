@@ -188,4 +188,4 @@ Oscilloscope capture from early hardware bring-up (~60 Hz test signal), before t
 
 ## License
 
-No license has been selected yet. Add the license that matches how you want others to use the project.
+No license.
